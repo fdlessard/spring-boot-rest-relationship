@@ -1,8 +1,7 @@
 package io.fdlessard.codebites.relationships.model;
 
-import org.springframework.data.rest.core.config.Projection;
-
 import java.util.List;
+import org.springframework.data.rest.core.config.Projection;
 
 @Projection(
         name = "accountProjection",
