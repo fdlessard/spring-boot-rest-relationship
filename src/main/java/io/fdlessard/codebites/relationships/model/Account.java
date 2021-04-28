@@ -42,12 +42,6 @@ public class Account extends BaseEntity {
     private List<Address> addresses;
 
     @Valid
-    @ManyToMany
-    @JoinTable(
-            schema = "public",
-            name = "account_group_account",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "account_group_id")
-    )
+    @ManyToMany(mappedBy = "accounts")
     private List<AccountGroup> accountGroups;
 }

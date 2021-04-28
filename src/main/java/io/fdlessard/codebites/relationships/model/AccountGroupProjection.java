@@ -14,6 +14,6 @@ public interface AccountGroupProjection {
 
     String getName();
 
-    List<Account> getCustomers();
+    List<Account> getAccounts();
 
 }

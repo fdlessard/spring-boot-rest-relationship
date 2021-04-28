@@ -11,7 +11,7 @@ management:
         include: "*"
 
 logging:
-  level.root: INFO
+  level.root: DEBUG
   #  level.org.hibernate.SQL: DEBUG
   level.liquibase: INFO
   level.io.fdlessard.codebites.relationships: DEBUG
@@ -32,8 +32,8 @@ spring:
     serialization:
       write_dates_as_timestamps: false
   datasource:
-    username: ${POSTGRES_USER:postgres}
-    password: ${POSTGRES_PASSWORD:secret}
+    username: ${POSTGRES_USER:crm-user}
+    password: ${POSTGRES_PASSWORD:crm-password}
     platform: postgres
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:postgres}

@@ -3,6 +3,8 @@ package io.fdlessard.codebites.relationships.model;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -26,7 +28,13 @@ public class AccountGroup extends BaseEntity {
     private String name;
 
     @Valid
-    @ManyToMany(mappedBy = "accountGroups")
+    @ManyToMany
+    @JoinTable(
+        schema = "public",
+        name = "account_group_account",
+        joinColumns = @JoinColumn(name = "account_group_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id")
+    )
     private List<Account> accounts;
 
 }
