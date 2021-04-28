@@ -1,0 +1,56 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 1
+      author: fdlessard@gmail.com
+      changes:
+
+        - createTable:
+            tableName: account
+            columns:
+              - column: {name: id, type: bigserial, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: version, type: int, defaultValueNumeric: 0, constraints: {nullable: false}}
+              - column: {name: first_name, type: varchar(50)}
+              - column: {name: last_name, type: varchar(50)}
+              - column: {name: company, type: varchar(50)}
+
+        - createTable:
+            tableName: address
+            columns:
+              - column: {name: id, type: bigserial, constraints: {primaryKey: true, nullable: false}}
+              - column: {name: account_id, type: bigint, constraints: {nullable: false}}
+              - column: {name: version, type: int, defaultValueNumeric: 0, constraints: {nullable: false}}
+              - column: {name: number, type: varchar(50)}
+              - column: {name: street, type: varchar(50)}
+              - column: {name: city, type: varchar(50)}
+              - column: {name: province, type: varchar(50)}
+              - column: {name: postal_code, type: varchar(50)}
+              - column: {name: country, type: varchar(50)}
+
+        - createTable:
+            tableName: account_group
+            columns:
+              - column: { name: id, type: bigserial, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: version, type: int, defaultValueNumeric: 0, constraints: { nullable: false } }
+              - column: { name: name, type: varchar(50) }
+
+        - createTable:
+            tableName: account_group_account
+            columns:
+              - column: { name: account_group_id, type: bigint,  constraints: { primaryKey: true, nullable: false } }
+              - column: { name: account_id, type: bigint,  constraints: { primaryKey: true, nullable: false } }
+        - addForeignKeyConstraint:
+            baseColumnNames: account_group_id
+            baseTableName: account_group_account
+            constraintName: fk_account_group_account_account_group
+            referencedTableName: account_group
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseColumnNames: account_id
+            baseTableName: account_group_account
+            constraintName: fk_account_group_account_account
+            referencedTableName: account
+            referencedColumnNames: id
+
+  - include:
+      file: "db/data/db.data.yaml"
